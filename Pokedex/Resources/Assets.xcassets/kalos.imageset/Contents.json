@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "kalos_pokedex_wallpaper_by_kalosdex_d7h52e1-fullview.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
