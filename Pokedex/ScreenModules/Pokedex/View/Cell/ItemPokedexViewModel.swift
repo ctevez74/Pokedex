@@ -5,6 +5,8 @@
 //  Created by Carlos Gabriel Tevez on 22/01/2023.
 //
 
+import UIKit
+
 struct ItemPokedexViewModel {
     private let pokedexItem: PokedexItem
     
@@ -24,9 +26,13 @@ struct ItemPokedexViewModel {
         pokedexItem.id
     }
     
-    // TODO: Move to constants
-    var imageUrl: String {
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(imageName).png"
+    var imageUrl: URL? {
+        let urlString = Endpoint.detailPicture("\(pokedexItem.id)").path
+        return URL(string: urlString)
+    }
+    
+    func getPlaceholder() -> UIImage {
+        #imageLiteral(resourceName: "placeholder")
     }
 }
 
