@@ -24,7 +24,14 @@ final class PokedexCoordinator: Coordinator {
 
 extension PokedexCoordinator: PokedexTableViewControllerCoordinator {
     func didSelectPokedexCell(model: PokedexItem) {
-        let urlDetail = "\(Endpoint.detailUrl)\(model.id)"
-        // TODO: Go to detail
+        let id = "\(model.id)"
+        let urlDetail = Endpoint.detail(id)
+        goToDetail(in: urlDetail)
+    }
+    
+    private func goToDetail(in urlList: Endpoint) {
+        let detailCoordinator = pokedexFactory.makeCoordinatorDetail(navigationController: navigationController, urlList: urlList)
+
+        detailCoordinator.start()
     }
 }
