@@ -176,9 +176,11 @@ extension DetailViewController: UITableViewDelegate {
                                for: .normal)
         sectionButton.backgroundColor = .systemBlue
         sectionButton.tag = section
-        sectionButton.addTarget(self,
-                                action: #selector(self.hideSection(sender:)),
-                                for: .touchUpInside)
+        if viewModel.getContentIn(section: section) > 0 {
+            sectionButton.addTarget(self,
+                                    action: #selector(self.hideSection(sender:)),
+                                    for: .touchUpInside)
+        }
         
         return sectionButton
     }
