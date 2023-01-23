@@ -56,6 +56,7 @@
 		8856B828297ECE9200F0171C /* PokemonList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856B826297ECE9200F0171C /* PokemonList+CoreDataClass.swift */; };
 		8856B829297ECE9200F0171C /* PokemonList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856B827297ECE9200F0171C /* PokemonList+CoreDataProperties.swift */; };
 		8856B82B297ECF3100F0171C /* PokemonsStoredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856B82A297ECF3100F0171C /* PokemonsStoredData.swift */; };
+		8856B82D297ED50A00F0171C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8856B82C297ED50A00F0171C /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		8856B826297ECE9200F0171C /* PokemonList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8856B827297ECE9200F0171C /* PokemonList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8856B82A297ECF3100F0171C /* PokemonsStoredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsStoredData.swift; sourceTree = "<group>"; };
+		8856B82C297ED50A00F0171C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 			children = (
 				8856B7BC297D6E7200F0171C /* Endpoint.swift */,
 				8856B7D0297D738200F0171C /* ApiService */,
+				8856B82C297ED50A00F0171C /* Reachability.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				8856B7B8297D6C4C00F0171C /* PokedexItem.swift in Sources */,
 				8856B7F8297E4BFF00F0171C /* UIImage+CropAlpha.swift in Sources */,
 				8856B7C6297D726A00F0171C /* PokedexRepository.swift in Sources */,
+				8856B82D297ED50A00F0171C /* Reachability.swift in Sources */,
 				8856B809297E4EB700F0171C /* DetailRepositoryProtocol.swift in Sources */,
 				8856B7AC297D6A6A00F0171C /* PokedexFactory.swift in Sources */,
 				8856B7AE297D6BA500F0171C /* PokedexTableViewController.swift in Sources */,

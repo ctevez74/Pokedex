@@ -59,6 +59,12 @@ class DetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureVC()
+        
+        if !Reachability.isConnectedToNetwork() {
+            configureOffline()
+            return
+        }
         
         configureView()
         configureSubscriptions()
@@ -66,9 +72,41 @@ class DetailViewController: UIViewController {
     }
     
     // MARK: - Configure
-    private func configureView() {
+    private func configureOffline() {
+        let notConnectionImg = #imageLiteral(resourceName: "errorImg")
+        let errorImageView = UIImageView(image: notConnectionImg)
+        view.addSubview(errorImageView)
+        errorImageView.contentMode = .scaleAspectFit
+        errorImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let errorLabel = UILabel()
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.numberOfLines = 0
+        errorLabel.text = "No connection detected" // TODO: Localizable
+        errorLabel.textAlignment = .center
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            errorImageView.bottomAnchor.constraint(equalTo: errorLabel.topAnchor),
+            errorImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            errorLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorLabel.heightAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    private func configureVC() {
         view.backgroundColor = .white
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    private func configureView() {
         configureHeaderView()
         configureBackground()
         configureTableView()

@@ -59,10 +59,12 @@ class ItemPokedexCell: UITableViewCell {
         nameLabel.attributedText = NSAttributedString(string: viewModel.name, attributes: textAttributes)
         // TODO: Add placeholder
         
-        if let url = viewModel.imageUrl {
+        if let url = viewModel.imageUrl, Reachability.isConnectedToNetwork() {
             pokeImageView.af_setImage(withURL: url, placeholderImage: viewModel.getPlaceholder(), completion: { _ in
                 self.pokeImageView.image = self.pokeImageView.image?.cropAlpha()
             })
+        } else {
+            pokeImageView.image =  viewModel.getPlaceholder()
         }
     }
     

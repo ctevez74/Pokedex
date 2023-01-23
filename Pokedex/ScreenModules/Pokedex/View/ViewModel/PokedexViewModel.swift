@@ -37,8 +37,23 @@ final class PokedexViewModel: PokedexViewModelProtocol {
     }
     
     func getPokemons() {
-        // TODO: Implement not have connection
         isLoading = true
+
+        if !Reachability.isConnectedToNetwork() {
+            getPokemosOffline()
+            return
+        }
+        
+        getPokemonsOnline()
+    }
+    
+    private func getPokemosOffline() {
+        let result = loadPokedexUseCase.fetchPokedexDataStored()
+        pokemonsList = result
+        isLoading = false
+    }
+    
+    private func getPokemonsOnline() {
         Task {
             let result = await loadPokedexUseCase.execute()
             self.isLoading = false
