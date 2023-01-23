@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "errorImg.png",
+      "filename" : "894c4fa15ddf231530f3f272ada404d3-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "errorImg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "errorImg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -35,6 +35,12 @@ class PokedexTableViewController: UIViewController {
         return loading
     }()
     
+    fileprivate(set) lazy var emptyStateView: UIView = {
+        let view = UIImageView(image: #imageLiteral(resourceName: "pikachu-questionMark"))
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
     lazy var searchBarController: UISearchController = UISearchController()
     
     
@@ -98,6 +104,12 @@ class PokedexTableViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in } receiveValue: { [weak self] _ in
                 guard let self = self else { return }
+                if self.viewModel.pokemonsItemsCount == 0 {
+                    self.tableView.backgroundView = self.emptyStateView
+                } else {
+                    self.tableView.backgroundView = nil
+                }
+                
                 self.tableView.reloadData()
             }.store(in: &anyCancellable)
         

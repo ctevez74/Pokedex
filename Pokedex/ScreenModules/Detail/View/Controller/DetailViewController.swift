@@ -73,7 +73,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Configure
     private func configureOffline() {
-        let notConnectionImg = #imageLiteral(resourceName: "errorImg")
+        let notConnectionImg = #imageLiteral(resourceName: "pikachu-questionMark")
         let errorImageView = UIImageView(image: notConnectionImg)
         view.addSubview(errorImageView)
         errorImageView.contentMode = .scaleAspectFit
