@@ -33,7 +33,6 @@ class DetailViewController: UIViewController {
         tv.rowHeight = UITableView.automaticDimension
         tv.estimatedRowHeight = UITableView.automaticDimension
         
-        tv.register(ItemPokedexCell.self, forCellReuseIdentifier: "ItemPokedexCell")
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
