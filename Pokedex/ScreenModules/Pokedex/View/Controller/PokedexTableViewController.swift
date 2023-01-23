@@ -28,6 +28,13 @@ class PokedexTableViewController: UIViewController {
         return tv
     }()
     
+    var loading: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView(style: .large)
+        loading.color = .yellow
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        return loading
+    }()
+    
     lazy var searchBarController: UISearchController = UISearchController()
     
     
@@ -70,6 +77,22 @@ class PokedexTableViewController: UIViewController {
         ])
     }
     
+    private func configureLoading(state: Bool) {
+        if state {
+            loading.startAnimating()
+            tableView.addSubview(loading)
+            NSLayoutConstraint.activate([
+                loading.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+                loading.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+            ])
+            return
+        }
+        
+        DispatchQueue.main.async() {
+            self.loading.removeFromSuperview()
+        }
+    }
+    
     private func configureSubscriptions() {
         viewModel.reloadData
             .receive(on: DispatchQueue.main)
@@ -77,6 +100,11 @@ class PokedexTableViewController: UIViewController {
                 guard let self = self else { return }
                 self.tableView.reloadData()
             }.store(in: &anyCancellable)
+        
+        viewModel.isLoadingPublisher.sink {[weak self] state in
+            guard let state = state else { return }
+            self?.configureLoading(state: state)
+        }.store(in: &anyCancellable)
     }
     
     // MARK: - Scroll
@@ -107,7 +135,6 @@ extension PokedexTableViewController: UITableViewDataSource {
         return cell
     }
 }
-
 
 extension PokedexTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

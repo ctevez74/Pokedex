@@ -10,6 +10,7 @@ import Combine
 
 protocol PokedexViewModelProtocol {
     var reloadData: PassthroughSubject<Void, Error> { get }
+    var isLoadingPublisher:  Published<Bool?>.Publisher { get }
     var pokemonsItemsCount: Int { get }
     
     func getPokemonCellViewModel(for indexPath: IndexPath) -> ItemPokedexViewModel
@@ -28,6 +29,8 @@ final class PokedexViewModel: PokedexViewModelProtocol {
     var pokemonsItemsCount: Int {
         isSearching ? filteredTableData.count : pokemonsList.count
     }
+    @Published private var isLoading: Bool?
+    var isLoadingPublisher: Published<Bool?>.Publisher { $isLoading }
     
     init(loadPokedexUseCase: LoadPokedexUseCaseProtocol) {
         self.loadPokedexUseCase = loadPokedexUseCase
@@ -35,9 +38,10 @@ final class PokedexViewModel: PokedexViewModelProtocol {
     
     func getPokemons() {
         // TODO: Implement not have connection
-        
+        isLoading = true
         Task {
             let result = await loadPokedexUseCase.execute()
+            self.isLoading = false
             switch result {
             case .success(let pokedex):
                 self.pokemonsList = pokedex.pokemons
