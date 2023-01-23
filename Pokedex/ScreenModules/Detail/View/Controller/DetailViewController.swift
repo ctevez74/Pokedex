@@ -39,6 +39,12 @@ class DetailViewController: UIViewController {
         return tv
     }()
     var hiddenSections = Set<Int>() // TODO: Move vm ?
+    var loading: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView(style: .large)
+        loading.color = .yellow
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        return loading
+    }()
     
     // MARK: - Init
     init(viewModel: DetailViewModelProtocol) {
@@ -79,6 +85,27 @@ class DetailViewController: UIViewController {
                 self.configureNameLabel()
                 self.configureTypesLabel()
             }.store(in: &anyCancellable)
+        
+        viewModel.isLoadingPublisher.sink {[weak self] state in
+            guard let state = state else { return }
+            self?.configureLoading(state: state)
+        }.store(in: &anyCancellable)
+    }
+    
+    private func configureLoading(state: Bool) {
+        if state {
+            loading.startAnimating()
+            view.addSubview(loading)
+            NSLayoutConstraint.activate([
+                loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+            return
+        }
+        
+        DispatchQueue.main.async() {
+            self.loading.removeFromSuperview()
+        }
     }
 }
 

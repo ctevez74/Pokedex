@@ -10,7 +10,10 @@ import Combine
 
 protocol DetailViewModelProtocol {
     var pokemon: PokemonDetail? { get }
+    
+    // -- Combine
     var reloadData: PassthroughSubject<Void, Error> { get }
+    var isLoadingPublisher:  Published<Bool?>.Publisher { get }
     
     func fetchDetail()
    
@@ -32,12 +35,13 @@ protocol DetailViewModelProtocol {
 final class DetailViewModel: DetailViewModelProtocol {
     var pokemon: PokemonDetail?
     var reloadData = PassthroughSubject<Void, Error>()
+    @Published private var isLoading: Bool?
+    var isLoadingPublisher: Published<Bool?>.Publisher { $isLoading }
     private let loadDetailUseCase: LoadDetailUseCaseProtocol
     private let details = [String]()
     var sectionsCount: Int {
         DetailViewModel.Sections.allCases.count
     }
-    
     
     enum Sections: String, CaseIterable {
         case forms
@@ -50,7 +54,9 @@ final class DetailViewModel: DetailViewModelProtocol {
     }
     
     func fetchDetail() {
+        isLoading = true
         Task {
+            self.isLoading = false
             // TODO: Unrw
             let result = await loadDetailUseCase.execute()
             switch result {
