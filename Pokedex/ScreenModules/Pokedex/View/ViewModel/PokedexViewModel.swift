@@ -45,7 +45,7 @@ final class PokedexViewModel: PokedexViewModelProtocol {
             switch result {
             case .success(let pokedex):
                 self.pokemonsList = pokedex.pokemons
-                // TODO: Implement persist data
+                loadPokedexUseCase.saveInStorage(list: self.pokemonsList)
                 self.reloadData.send()
             case .failure(let error):
                 print("Ctvz error--- implement", error)

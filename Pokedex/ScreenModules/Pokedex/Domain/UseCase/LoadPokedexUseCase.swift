@@ -9,6 +9,8 @@ import Foundation
 
 protocol LoadPokedexUseCaseProtocol {
     func execute() async -> Result<Pokedex, Error>
+    func saveInStorage(list: [PokedexItem])
+    func fetchPokedexDataStored() -> [PokedexItem]
 }
 
 struct LoadPokedexUseCase: LoadPokedexUseCaseProtocol {
@@ -22,6 +24,14 @@ struct LoadPokedexUseCase: LoadPokedexUseCaseProtocol {
         } catch {
             return .failure(error)
         }
+    }
+    
+    func saveInStorage(list: [PokedexItem]) {
+        pokedexRepository.savePokedexDataStorage(data: list)
+    }
+    
+    func fetchPokedexDataStored() -> [PokedexItem] {
+        pokedexRepository.fetchPokedexDataStored()
     }
 }
 

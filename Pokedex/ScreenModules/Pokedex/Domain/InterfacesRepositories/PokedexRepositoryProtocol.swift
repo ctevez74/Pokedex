@@ -7,4 +7,6 @@
 
 protocol PokedexRepositoryProtocol {
     func fetchPokedexData() async throws -> Pokedex
+    func fetchPokedexDataStored() -> [PokedexItem]
+    func savePokedexDataStorage(data: [PokedexItem])
 }
